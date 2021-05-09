@@ -38,13 +38,32 @@ exports.create=(req,res)=>{
 
 // retrieve and return all users/ retrive and return a single user
 exports.find=(req, res)=>{
-    Userdb.find()
-    .then(user=>{
-        res.send(user)
-    })
-    .catch(err=>{
-        res.status(500).send({message:err.message || "Error ao encontrar informações do cliente"})
-    })
+
+    if(req.query.id){
+        const id = req.query.id;
+
+        Userdb.findById(id)
+         .then(data=>{
+            if(!data){
+                res.status(404).send({message:"Cliente não foi encontrado, com id " + id})
+            }else{
+                res.send(data)
+            }
+         })
+         .catch(err=>{
+             res.status(500).send({ message: "Erro ao encontrar cliente, com id " + id})
+         })
+
+    }else{
+        Userdb.find()
+        .then(user=>{
+            res.send(user)
+        })
+        .catch(err=>{
+            res.status(500).send({message:err.message || "Error ao encontrar informações do cliente"})
+        })
+
+    }
 }
 
 // Update a new identified user by user id
