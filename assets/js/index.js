@@ -22,9 +22,9 @@ $("#update_user").submit(function(event){
 
     $.ajax(request).done(function(response){
         alert("Dados atualizados com sucesso!");
+        location.href='/';
     })
 
-    location.href='/';
 })
 
 if(window.location.pathname == "/"){
