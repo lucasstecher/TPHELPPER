@@ -38,12 +38,35 @@ exports.create=(req,res)=>{
 
 // retrieve and return all users/ retrive and return a single user
 exports.find=(req, res)=>{
-
+    Userdb.find()
+    .then(user=>{
+        res.send(user)
+    })
+    .catch(err=>{
+        res.status(500).send({message:err.message || "Error ao encontrar informações do cliente"})
+    })
 }
 
 // Update a new identified user by user id
 exports.update = (req, res)=>{
+    if(!req.body){
+        return res
+         .status(400)
+         .send({message: "Os campos de dados não podem estar vazios"})
+    }
 
+    const id = req.params.id;
+    Userdb.findByIdAndUpdate(id, req.body,{useFindAndModify:false})
+      .then(data=>{
+          if(!data){
+              res.status(404).send({message:`O cliente ${id} não pôde ser atualizado. Talvez não foi encontrado!`})
+          }else{
+              res.send(data)
+          }
+      })
+      .catch(err=>{
+          res.status(500).send({message:"Erro ao atualizar as informações do cliente"})
+      })
 }
 
 // Delete a user with specified user id in the request
