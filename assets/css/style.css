@@ -19,7 +19,7 @@ a {
 }
 
 .container{
-    max-width: 1024px;
+    max-width: 80%;
     margin: auto;
 }
 
@@ -115,6 +115,10 @@ table{
     color: #fff;
     background-color: var(--dark);
     border-color: #32383e;
+}
+
+.delete{
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 1024px){

@@ -1,5 +1,7 @@
 $("#add_user").submit(function(event){
     alert("Dados inseridos com sucesso!");
+
+    location.href='/';
 })
 
 $("#update_user").submit(function(event){
@@ -21,6 +23,8 @@ $("#update_user").submit(function(event){
     $.ajax(request).done(function(response){
         alert("Dados atualizados com sucesso!");
     })
+
+    location.href='/';
 })
 
 if(window.location.pathname == "/"){
